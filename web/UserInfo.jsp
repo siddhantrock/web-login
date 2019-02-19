@@ -14,6 +14,9 @@
     <body>
         
         <%!
+            Connection con;
+            ResultSet rs;
+            Statement st;
             public void jspInit()
            {
               try
@@ -34,10 +37,12 @@
             String username=(String)session.getAttribute("username");
             String password=(String)session.getAttribute("password");
             
-            try(Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/weblogin","root","siddhu1234@#"))
+            try
             {
-                Statement st=con.createStatement();
-                ResultSet rs=st.executeQuery("select name from first where username='" + username + "' and password='" + password + "'");
+                con=DriverManager.getConnection("jdbc:mysql://localhost:3306/weblogin","root","siddhu1234@#");
+            
+                st=con.createStatement();
+                rs=st.executeQuery("select * from first where username='" + username + "' and password='" + password + "'");
                 
                 if(rs.next())
                 {
@@ -54,9 +59,15 @@
             }
         %>
         
+    <center>
         <form action="Logout">
+            
+            Name : <%= rs.getString("name") %>
+            <br/>
+            
             <input type="submit" value="Logout">
             
         </form>
+    </center>
     </body>
 </html>
