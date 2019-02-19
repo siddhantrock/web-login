@@ -32,6 +32,7 @@
          %>
          
         <%@page import="java.sql.*" %>
+        <%@page import="java.io.*" %>
         
         <%
             String username=(String)session.getAttribute("username");
@@ -77,6 +78,34 @@
             Course : <%= rs.getString("course") %>
             <br/>
             
+            <%!
+                void insertFile()
+                {
+                    try
+                    {
+                      File f=new File("D:\\javaprogram\\login web\\img.jpg");
+                      FileOutputStream fos=new FileOutputStream(f);
+                      InputStream is=rs.getBinaryStream("pic");
+                      
+                      byte b1[]=new byte[5000];
+                      int c;
+                      
+                      while((c=is.read(b1))>0)
+                      {
+                          fos.write(b1, 0, c);
+                          fos.flush();
+                      }
+                    }
+                    catch(IOException | SQLException e)
+                    {
+                        
+                    }
+                }
+                
+            %>
+            
+            Picture :
+            <img src="D:\\javaprogram\\img.jpg" height="100" width="100">
             
             <input type="submit" value="Logout">
             
