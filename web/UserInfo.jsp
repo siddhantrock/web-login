@@ -65,6 +65,19 @@
             Name : <%= rs.getString("name") %>
             <br/>
             
+            Age : <%= rs.getInt("age") %>
+            <br/>
+            
+            Gender : <%= rs.getString("gender") %>
+            <br/>
+            
+            Degree : <%= rs.getString("degree") %>
+            <br/>
+            
+            Course : <%= rs.getString("course") %>
+            <br/>
+            
+            
             <input type="submit" value="Logout">
             
         </form>
